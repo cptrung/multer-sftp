@@ -1,16 +1,16 @@
 import * as ssh2 from 'ssh2';
-import { StorageEngine } from 'multer';
+import * as Multer from 'multer';
 
 interface SFTPStorageOptions {
   sftp: ssh2.ConnectConfig;
   destination?: string | ((
     req: Request,
-    file: Express.Multer.File,
+    file: Multer.File,
     callback: (error: Error | null, destination: string) => void
   ) => void);
   filename?(
     req: Request,
-    file: Express.Multer.File,
+    file: Multer.File,
     callback: (error: Error | null, filename: string) => void
   ): void;
 }
@@ -24,7 +24,7 @@ declare global {
 }
 
 interface SFTPStorage {
-  (options?: SFTPStorageOptions): StorageEngine;
+  (options?: SFTPStorageOptions): Multer.StorageEngine;
 }
 
 declare const sftpStorage: SFTPStorage;
